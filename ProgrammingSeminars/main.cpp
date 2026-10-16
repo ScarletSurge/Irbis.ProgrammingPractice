@@ -1,10 +1,14 @@
 ﻿#include <iostream>
+#include <vector>
 
 #include "int_wrapper.h"
+#include "binomial_priority_queue.h"
 #include "polynomial.h"
 #include "binary_search_tree.h"
+#include "trie.h"
+#include "arithmetic_expressions_context.h"
 
-int x;
+int x; // BAD
 
 class compiler_defaults
 {
@@ -152,7 +156,7 @@ public:
 
 // vtable
 
-void class_example_demo()
+int class_example_demo()
 {
 	{
 		auto p = point_2D(52.0, 1337.0);
@@ -166,9 +170,11 @@ void class_example_demo()
 	//obj2.data = 10;
 
 	// operator<<(std::cout, .func<>_class_example::get_data(&obj2)); // class_example *
+
+	return 0;
 }
 
-void references_demo()
+int references_demo()
 {
 	auto x = 10;
 
@@ -177,6 +183,8 @@ void references_demo()
 
 	*p = 20; // typeof(*p) == int&
 	r = 30;
+
+	return 0;
 }
 
 class rule_of_3
@@ -212,7 +220,7 @@ public:
 
 };
 
-void rule_of_3_demo()
+int rule_of_3_demo()
 {
 	rule_of_3 obj1;
 
@@ -223,6 +231,8 @@ void rule_of_3_demo()
 	obj1 = rule_of_3(obj2);
 
 	std::cout << "rule_of_3_demo work ends..." << std::endl;
+
+	return 0;
 }
 
 class number
@@ -259,7 +269,7 @@ public:
 
 };
 
-void int_wrapper_demo()
+int int_wrapper_demo()
 {
 	int_wrapper wr1(52);
 	int_wrapper wr2(80);
@@ -277,9 +287,11 @@ void int_wrapper_demo()
 	// a + b; b + a;
 	//auto x = wr1 + 10;
 	//x =  + 10
+
+	return 0;
 }
 
-void exceptions_demo()
+int exceptions_demo()
 {
 	int_wrapper x(10);
 	int_wrapper y(1);
@@ -299,7 +311,11 @@ void exceptions_demo()
 	std::cout << std::endl << "We got here!";
 
 	delete[] values;
+
+	return 0;
 }
+
+#pragma region INHERITANCE EXAMPLE
 
 class base
 {
@@ -334,16 +350,20 @@ public:
 	}
 };
 
-void destructors_chain_demo()
+int destructors_chain_demo()
 {
 	base *obj = new derived;
 
 	// TODO: 
 
 	delete obj;
+
+	return 0;
 }
 
-void dynamic_cast_demo()
+#pragma endregion
+
+int dynamic_cast_demo()
 {
 	class puk1 { public: virtual ~puk1() noexcept = default; };
 	class puk2 : public puk1 {};
@@ -358,9 +378,9 @@ void dynamic_cast_demo()
 	{
 		std::cout << "OK cast";
 	}
-}
 
-#include "binomial_priority_queue.h"
+	return 0;
+}
 
 int priorities_comparer(
 	int first,
@@ -369,7 +389,7 @@ int priorities_comparer(
 	return first - second;
 }
 
-void bpq_demo()
+int binomial_priority_queue_demo()
 {
 	srand((unsigned)time(NULL));
 
@@ -378,7 +398,7 @@ void bpq_demo()
 	binomial_priority_queue meld_from_all(priorities_comparer);
 
 	char *removed_value;
-	for (int i = 0; i < 250; i++)
+	for (int i = 0; i < 2000; i++)
 	{
 		switch (rand() % 1)
 		{
@@ -401,11 +421,16 @@ void bpq_demo()
 		meld_from_all = *melded;
 		delete melded;
 
-		std::cout << "instance: ";
-		instance.debug_print();
-		std::cout << "melded: ";
-		meld_from_all.debug_print();
+		if (i % 50 == 0)
+		{
+			std::cout << "instance: ";
+			instance.debug_print();
+			std::cout << "melded: ";
+			meld_from_all.debug_print();
+		}
 	}
+
+	return 0;
 }
 
 int c_strings_demo()
@@ -416,8 +441,6 @@ int c_strings_demo()
 
 	return 0;
 }
-
-#include "trie.h"
 
 int trie_demo()
 {
@@ -452,8 +475,6 @@ int trie_demo()
 
 	return 0;
 }
-
-#include "arithmetic_expressions_context.h"
 
 int expression_tree_demo()
 {
@@ -494,8 +515,6 @@ int static_demo()
 
 	return 0;
 }
-
-#include <vector>
 
 int polynomials_demo()
 {
@@ -596,62 +615,13 @@ int binary_search_tree_demo()
 
 int main()
 {
-	return binary_search_tree_demo();
+	return binomial_priority_queue_demo();
+	// return binary_search_tree_demo();
 	// return polynomials_demo();
 	// return trie_demo();
 	// return static_demo();
 	// return expression_tree_demo();
-	// destructors_chain_demo();
-	// return 0;
-
-	// std::cout << "punjk srenjk((9(9";
-	// char c = 10;
-	// TODO: find case when this not works
-	// int_wrapper x(10);
-	// int_wrapper x1(c);
-	// references_demo();
-	//rule_of_3_demo();
-	//int_wrapper_demo();
-	// int x = 15; // sizeof(int) == 4
-	// // Little endian, Big endian
-	// // 00001111 00000000 00000000 00000000
-	// 
-	// x << 3;
-	// 
-	// // 01111000 00000000 00000000 00000000
-	// // 2^3 + 2^4 + 2^5 + 2^6 = 2^3 * (1 + 2 + 4 +  8)
-	// 
-	// // n << k <-> n * 2^k
-	// 
-	// // operator<<
-	// operator<<(std::cout, "string\n\n");
-	// //std::cout
-	// //	<< "string"
-	// //	<< std::endl
-	// //	<< "string2";
-	// 
-	// int z = 10, y = 5;
-	// z* y;
-	// int* p = &z;
-	// *p = 20;
-	// 
-	// x = y = z;
-	// x + y + z;
-
-	// exceptions_demo();
-
-	//return c_strings_demo();
-
-	// return trie_demo();
-	// 
-	// std::cout << ((sqrt(2.0) * sqrt(2.0) == 2.0)
-	// 	? "Equal"
-	// 	: "Not equal")
-	// 	<< std::endl;
-	// std::cout << (-1 << 3) << std::endl;
-
-	// dynamic_cast_demo();
-	// bpq_demo();
+	// return destructors_chain_demo();
 
 	return 0;
 }

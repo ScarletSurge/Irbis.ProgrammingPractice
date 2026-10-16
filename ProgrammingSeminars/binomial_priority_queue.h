@@ -76,10 +76,10 @@ private:
 	static node *copy_binomial_trees_list(
 		node const *root)
 	{
-			if (root == nullptr)
-			{
-				return nullptr;
-			}
+		if (root == nullptr)
+		{
+			return nullptr;
+		}
 
 		node const *runner = root;
 		node *runner_copy = nullptr;
